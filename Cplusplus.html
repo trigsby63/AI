@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World in C++</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      background: #1f4e79;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 25px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      color: #1f4e79;
+    }
+
+    pre {
+      background: #222;
+      color: #00ff90;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 16px;
+    }
+
+    button {
+      background: #1f4e79;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #163a59;
+    }
+
+    .output {
+      background: #eef6ff;
+      border-left: 5px solid #1f4e79;
+      padding: 15px;
+      margin-top: 15px;
+      font-weight: bold;
+      min-height: 30px;
+    }
+
+    .question {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9fafb;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Hello World in C++</h1>
+  <p>An Interactive Introduction for Beginning Programming Students</p>
+</header>
+
+<main>
+  <h2>What Is a “Hello World” Program?</h2>
+  <p>
+    The “Hello World” program is often the first program students write when learning a new programming language.
+    It teaches the basic structure of a program and how to display output on the screen.
+  </p>
+
+  <h2>C++ Example</h2>
+  <pre><code>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+    return 0;
+}
+  </code></pre>
+
+  <button onclick="runProgram()">Run Program</button>
+  <button onclick="explainCode()">Explain Code</button>
+  <button onclick="clearOutput()">Clear</button>
+
+  <div class="output" id="outputBox">
+    Click “Run Program” to see the output.
+  </div>
+
+  <h2>Code Explanation</h2>
+  <div class="output" id="explanationBox">
+    Click “Explain Code” to learn what each part does.
+  </div>
+
+  <div class="question">
+    <h2>Quick Check</h2>
+    <p>Which line displays text on the screen?</p>
+
+    <button onclick="checkAnswer('wrong')">#include &lt;iostream&gt;</button>
+    <button onclick="checkAnswer('correct')">cout &lt;&lt; "Hello, World!";</button>
+    <button onclick="checkAnswer('wrong')">return 0;</button>
+
+    <div class="feedback" id="feedbackBox"></div>
+  </div>
+</main>
+
+<script>
+  function runProgram() {
+    document.getElementById("outputBox").innerHTML =
+      "Program Output:<br><br>Hello, World!";
+  }
+
+  function explainCode() {
+    document.getElementById("explanationBox").innerHTML =
+      "<strong>#include &lt;iostream&gt;</strong> allows the program to use input and output.<br><br>" +
+      "<strong>using namespace std;</strong> lets us use standard C++ commands without typing std:: each time.<br><br>" +
+      "<strong>int main()</strong> is where the program begins running.<br><br>" +
+      "<strong>cout</strong> displays output on the screen.<br><br>" +
+      "<strong>return 0;</strong> tells the computer the program ended successfully.";
+  }
+
+  function clearOutput() {
+    document.getElementById("outputBox").innerHTML =
+      "Click “Run Program” to see the output.";
+    document.getElementById("explanationBox").innerHTML =
+      "Click “Explain Code” to learn what each part does.";
+    document.getElementById("feedbackBox").innerHTML = "";
+  }
+
+  function checkAnswer(answer) {
+    if (answer === "correct") {
+      document.getElementById("feedbackBox").innerHTML =
+        "Correct! The cout statement displays text on the screen.";
+      document.getElementById("feedbackBox").style.color = "green";
+    } else {
+      document.getElementById("feedbackBox").innerHTML =
+        "Not quite. Look for the line that uses cout.";
+      document.getElementById("feedbackBox").style.color = "red";
+    }
+  }
+</script>
+
+</body>
+</html>
