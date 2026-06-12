@@ -1,138 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professor Trigsby | Hill College</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(135deg, #eef4ff, #ffffff);
-            color: #1f2937;
-        }
+<section class="card">
+    <h2>Welcome to My Course Website</h2>
 
-        header {
-            background-color: #003366;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
+```
+<p>
+    This website provides instructional resources, interactive learning tools,
+    and AI-enhanced teaching materials developed for students and faculty at
+    Hill College.
+</p>
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
+<a class="button-link" href="Cplusplus.html">Go to Beginning C++</a>
 
-        header p {
-            margin: 8px 0 0;
-            font-size: 1.2rem;
-        }
+<br>
 
-        main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+<a class="button-link" href="lesson_prompt_generator_v2.html">
+    BCIS 1305 Lesson Prompt Generator
+</a>
 
-        .card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-            text-align: center;
-        }
+<br>
 
-        .card h2 {
-            color: #003366;
-            margin-top: 0;
-        }
+<button onclick="showMessage()">Click for Student Reminder</button>
 
-        .button-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 22px;
-            background-color: #0055a5;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-        }
+<div id="messageBox">
+    Remember: Programming takes practice. Read the instructions carefully,
+    test your code often, and ask questions when you need help.
+</div>
+```
 
-        .button-link:hover {
-            background-color: #003f7d;
-            transform: scale(1.05);
-        }
-
-        #messageBox {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: #e8f2ff;
-            border-left: 5px solid #0055a5;
-            border-radius: 8px;
-            display: none;
-        }
-
-        button {
-            margin-top: 20px;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 8px;
-            background-color: #f59e0b;
-            color: #111827;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #d97706;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f3f4f6;
-            color: #4b5563;
-            margin-top: 50px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Professor Trigsby</h1>
-        <p>Professor | Hill College</p>
-    </header>
-
-    <main>
-        <section class="card">
-            <h2>Welcome to My Course Website</h2>
-            <p>
-                This website provides resources and learning materials for students studying
-                computer science and programming at Hill College.
-            </p>
-
-            <a class="button-link" href="Cplusplus.html">Go to Beginning C++</a>
-
-            <br>
-
-            <button onclick="showMessage()">Click for Student Reminder</button>
-
-            <div id="messageBox">
-                Remember: Programming takes practice. Read the instructions carefully, test your code often, and ask questions when you need help.
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        &copy; 2026 Professor Trigsby | Hill College
-    </footer>
-
-    <script>
-        function showMessage() {
-            const messageBox = document.getElementById("messageBox");
-            messageBox.style.display = "block";
-        }
-    </script>
-</body>
-</html>
+</section>
