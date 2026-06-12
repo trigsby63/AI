@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BCIS 1305 Lesson Prompt Generator</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #5f6b7a;
+      --accent: #1f5f99;
+      --accent-dark: #17466f;
+      --border: #d6dbe3;
+      --soft: #eaf2fb;
+    }
+
+    body.dark {
+      --bg: #111827;
+      --card: #1f2937;
+      --text: #f9fafb;
+      --muted: #d1d5db;
+      --accent: #7ab7ff;
+      --accent-dark: #9bc8ff;
+      --border: #4b5563;
+      --soft: #263244;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--accent);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 0.5rem 0;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      padding: 1rem;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a, button {
+      border: none;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover, button:hover {
+      background: var(--accent-dark);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 0.85rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.25rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .help {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 0.25rem;
+    }
+
+    .output {
+      min-height: 420px;
+      white-space: pre-wrap;
+      font-family: "Courier New", monospace;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .small-card {
+      background: var(--soft);
+      border-left: 5px solid var(--accent);
+      padding: 0.85rem;
+      border-radius: 8px;
+      margin-top: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 1.5rem;
+    }
+
+    @media print {
+      nav, .button-row, .no-print {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      section {
+        box-shadow: none;
+        border: 1px solid #999;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BCIS 1305 Lesson Prompt Generator</h1>
+    <p>Instructor-facing tool for creating accessible, interactive lesson prompts from syllabus-based objectives.</p>
+  </header>
+
+  <nav aria-label="Lesson prompt generator navigation">
+    <a href="#lesson-info">Lesson Info</a>
+    <a href="#objectives">Objectives</a>
+    <a href="#content">Lesson Content</a>
+    <a href="#activities">Activities</a>
+    <a href="#accessibility">ADA Checklist</a>
+    <a href="#generated">Generated Prompt</a>
+    <button type="button" onclick="toggleTheme()">Light/Dark</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </nav>
+
+  <main>
+    <section id="lesson-info">
+      <h2>1. Lesson Information</h2>
+      <div class="grid">
+        <div>
+          <label for="lessonTitle">Lesson Title</label>
+          <input id="lessonTitle" placeholder="Example: Introduction to Microsoft Excel" />
+        </div>
+        <div>
+          <label for="courseName">Course Name</label>
+          <input id="courseName" value="BCIS 1305 - Business Computer Applications" />
+        </div>
+      </div>
+
+      <label for="audience">Student Audience</label>
+      <textarea id="audience" placeholder="Example: First-year college students with varied technology skills."></textarea>
+
+      <label for="instructorPerspective">Instructor Perspective / Teaching Notes</label>
+      <textarea id="instructorPerspective" placeholder="Example: Explain this lesson in a supportive instructor voice. Include reminders, common student mistakes, and practical classroom tips."></textarea>
+    </section>
+
+    <section id="objectives">
+      <h2>2. Learning Objectives from the Syllabus</h2>
+      <p class="help">Paste the BCIS 1305 syllabus learning objectives here. The generated prompt will ask AI to align the lesson to these objectives.</p>
+      <textarea id="objectivesText" placeholder="Paste syllabus learning objectives here."></textarea>
+
+      <div class="small-card">
+        <strong>Suggested objective wording:</strong>
+        Use application software to solve business problems; demonstrate file management skills; use word processing, spreadsheet, database, and presentation software; apply technology concepts to academic and workplace settings.
+      </div>
+    </section>
+
+    <section id="content">
+      <h2>3. Key Terms, Concepts, and Lesson Content</h2>
+
+      <label for="keyTerms">Key Terms</label>
+      <textarea id="keyTerms" placeholder="Example: workbook, worksheet, cell, formula, function, chart, relative reference"></textarea>
+
+      <label for="keyConcepts">Key Concepts</label>
+      <textarea id="keyConcepts" placeholder="Example: organizing data, using formulas, formatting worksheets, creating charts, checking accuracy"></textarea>
+
+      <label for="lessonContent">Main Content to Include</label>
+      <textarea id="lessonContent" placeholder="Describe the topic, required skills, software, or textbook/Cengage module content."></textarea>
+
+      <label for="embeddedLinks">Embedded Links / Resources</label>
+      <textarea id="embeddedLinks" placeholder="Add links to Cengage, Brightspace, Microsoft support pages, GitHub pages, videos, or instructor resources."></textarea>
+    </section>
+
+    <section id="activities">
+      <h2>4. Interactive Lesson Elements</h2>
+
+      <label for="pretest">Pretest Requirements</label>
+      <textarea id="pretest" placeholder="Example: Create 5 multiple-choice questions with answer key and brief feedback."></textarea>
+
+      <label for="flashcards">Flash Card Requirements</label>
+      <textarea id="flashcards" placeholder="Example: Create 10 flash cards with term, definition, and example."></textarea>
+
+      <label for="analogies">Analogies</label>
+      <textarea id="analogies" placeholder="Example: Compare a spreadsheet workbook to a binder with multiple pages."></textarea>
+
+      <label for="examples">Examples</label>
+      <textarea id="examples" placeholder="Example: Include workplace, college, and personal finance examples."></textarea>
+
+      <label for="summary">Summary Requirements</label>
+      <textarea id="summary" placeholder="Example: End with a short student-friendly summary and 3 review questions."></textarea>
+    </section>
+
+    <section id="accessibility">
+      <h2>5. ADA / Accessibility Checklist</h2>
+      <label for="adaChecklist">Accessibility Requirements</label>
+      <textarea id="adaChecklist">Use clear headings.
+Use plain language.
+Provide alt text suggestions for images.
+Ensure good color contrast.
+Do not rely on color alone.
+Use descriptive link text.
+Include keyboard-friendly navigation.
+Make tables simple and readable.
+Provide captions or transcripts for videos.
+Use accessible quiz and flash card formats.</textarea>
+    </section>
+
+    <section id="generated">
+      <h2>6. Generated Lesson Prompt</h2>
+      <p class="help">Select Generate Prompt, then copy the result into ChatGPT, Copilot, Gemini, or another AI tool.</p>
+
+      <div class="button-row no-print">
+        <button type="button" onclick="generatePrompt()">Generate Prompt</button>
+        <button type="button" onclick="copyPrompt()">Copy Prompt</button>
+        <button type="button" onclick="clearForm()">Clear Form</button>
+      </div>
+
+      <label for="generatedPrompt">Copyable Prompt</label>
+      <textarea id="generatedPrompt" class="output" readonly></textarea>
+    </section>
+  </main>
+
+  <footer>
+    <p>Created for BCIS 1305 Redesign documentation/files. Save as <strong>lesson_prompt_generator_v2.html</strong>.</p>
+  </footer>
+
+  <script>
+    function getValue(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function generatePrompt() {
+      const prompt = `You are an experienced college instructor creating a complete lesson for an introductory business computer applications course.
+
+Create the lesson from the instructor's perspective. The lesson should be clear, supportive, accessible, and appropriate for students with varied technology skills.
+
+LESSON TITLE:
+${getValue("lessonTitle") || "[Insert lesson title]"}
+
+COURSE NAME:
+${getValue("courseName") || "BCIS 1305 - Business Computer Applications"}
+
+STUDENT AUDIENCE:
+${getValue("audience") || "[Describe student audience]"}
+
+INSTRUCTOR PERSPECTIVE / TEACHING NOTES:
+${getValue("instructorPerspective") || "[Include instructor teaching notes, reminders, and common student issues]"}
+
+SYLLABUS LEARNING OBJECTIVES TO ALIGN WITH:
+${getValue("objectivesText") || "[Paste syllabus learning objectives here]"}
+
+KEY TERMS:
+${getValue("keyTerms") || "[List key terms]"}
+
+KEY CONCEPTS:
+${getValue("keyConcepts") || "[List key concepts]"}
+
+MAIN LESSON CONTENT TO INCLUDE:
+${getValue("lessonContent") || "[Describe the content to include]"}
+
+EMBEDDED LINKS / RESOURCES:
+${getValue("embeddedLinks") || "[List links and resources to include]"}
+
+REQUIRED LESSON STRUCTURE:
+1. Lesson title and course name
+2. Instructor overview
+3. Learning objectives aligned to the syllabus
+4. Key terms with student-friendly definitions
+5. Key concepts with explanations
+6. Short pretest with questions, answers, and feedback
+7. Flash cards with term, definition, and example
+8. Main lesson content with headings and step-by-step explanations
+9. Analogies that help beginning students understand the topic
+10. Practical examples related to college, workplace, and daily life
+11. Interactive checks for understanding
+12. Summary of the lesson
+13. Student next steps
+14. ADA/accessibility checklist
+
+PRETEST REQUIREMENTS:
+${getValue("pretest") || "Create a short pretest with multiple-choice or short-answer questions, answer key, and brief feedback."}
+
+FLASH CARD REQUIREMENTS:
+${getValue("flashcards") || "Create flash cards with term, definition, and example."}
+
+ANALOGIES TO INCLUDE:
+${getValue("analogies") || "Include simple analogies appropriate for beginning students."}
+
+EXAMPLES TO INCLUDE:
+${getValue("examples") || "Include examples from college, workplace, and everyday technology use."}
+
+SUMMARY REQUIREMENTS:
+${getValue("summary") || "End with a short summary and review questions."}
+
+ADA / ACCESSIBILITY REQUIREMENTS:
+${getValue("adaChecklist") || "Use accessible formatting, clear headings, plain language, descriptive links, alt text suggestions, and keyboard-friendly design."}
+
+OUTPUT FORMAT:
+Provide the lesson in a clean, instructor-ready format. Use headings, bullets where helpful, and student-friendly wording. Make the lesson easy to copy into Brightspace, a webpage, or course documentation.`;
+
+      document.getElementById("generatedPrompt").value = prompt;
+      document.getElementById("generated").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function copyPrompt() {
+      const promptBox = document.getElementById("generatedPrompt");
+      if (!promptBox.value.trim()) {
+        generatePrompt();
+      }
+      promptBox.select();
+      promptBox.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(promptBox.value).then(function() {
+        alert("Prompt copied to clipboard.");
+      }).catch(function() {
+        alert("Copy did not work automatically. Please select the prompt and copy it manually.");
+      });
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark");
+      localStorage.setItem("lessonPromptTheme", isDark ? "dark" : "light");
+    }
+
+    function clearForm() {
+      const fields = document.querySelectorAll("input, textarea");
+      fields.forEach(field => {
+        if (field.id === "courseName") {
+          field.value = "BCIS 1305 - Business Computer Applications";
+        } else if (field.id === "adaChecklist") {
+          field.value = `Use clear headings.
+Use plain language.
+Provide alt text suggestions for images.
+Ensure good color contrast.
+Do not rely on color alone.
+Use descriptive link text.
+Include keyboard-friendly navigation.
+Make tables simple and readable.
+Provide captions or transcripts for videos.
+Use accessible quiz and flash card formats.`;
+        } else {
+          field.value = "";
+        }
+      });
+    }
+
+    window.addEventListener("load", function() {
+      const savedTheme = localStorage.getItem("lessonPromptTheme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+      }
+    });
+  </script>
+</body>
+</html>
